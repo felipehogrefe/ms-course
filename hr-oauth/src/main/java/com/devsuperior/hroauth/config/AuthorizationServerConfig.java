@@ -17,7 +17,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
     private JwtAccessTokenConverter accessTokenConverter;
@@ -30,14 +30,14 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.tokenKeyAccess("permitALL()").checkTokenAccess("isAuthenticated()");
+        security.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
     }
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
                 .withClient("myappname123")
-                .secret(bCryptPasswordEncoder.encode("myappsecret123"))
+                .secret(passwordEncoder.encode("myappsecret123"))
                 .scopes("read", "write")
                 .authorizedGrantTypes("password")
                 .accessTokenValiditySeconds(86400);
