@@ -4,6 +4,7 @@
 ```
 docker network create hr-net
 ```
+64a775966231789c407a8d90b7ffbdabdd883dce754ff16c6938b8e8a334d7d4
 
 ## Testando perfil dev com Postgresql no Docker
 ```
